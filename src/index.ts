@@ -1,16 +1,12 @@
 import express from 'express' 
-// import qrCode from './qrCode'
 import qrCode from 'qrcode'
-import fs from 'fs'
-
 const app = express()
-
 // yarn add qrcode -D
 // yarn add @types/qrcode -D
 
 let data = {
     name: "Yasmim Roza",
-    age: 23,
+    age: 12,
     department: "Development",
     id: "sdf8s7fn32o3483297d"
 }
@@ -29,12 +25,12 @@ app.get('/console', (req, res) => {
            console.log(err)
         })
 
-    qrCode.toDataURL(stringdata, { // retorna um json
+    qrCode.toDataURL(stringdata, { // return json
         color: {
             dark: '#ff0000',
             light: '#0000'
         },
-        version: 10, scale: 10, margin: 6, width: 400, 
+        version: 10, scale: 10, margin: 6, width: 400,
     },function(err, code){
         if (err) console.log('error' + err)
         // return res.send("<!DOCTYPE html/><html><head><title>node-qrcode</title></head><body><img src='" + code + "'/></body></html>")
@@ -45,7 +41,7 @@ app.get('/console', (req, res) => {
             dark: '#800000',
             light: '#0000'
         },
-        version: 10, scale: 10, margin: 6, width: 400, 
+        version: 10, scale: 10, margin: 6, width: 400, type: 'image/jpeg'
     },function(err, code){
         if (err) console.log('error' + err)
         return res.send("<!DOCTYPE html/><html><head><title>node-qrcode</title></head><body><img src='" + code + "'/></body></html>")
@@ -60,25 +56,6 @@ app.get('/console', (req, res) => {
         if (err) throw err
         console.log('saved')
     })
-
-    /**
-     * qrCode.toCanvas(stringdata, function(err, code){
-        if (err) throw err
-        
-        var container = document.getElementById('container')
-
-        container.appendChild(code)
-    })
-     */
-
-    // qrCode.toFileStream('src/path/chihiro.png', 'TESTE', )
-
-    /** Retorna no console uma string
-     *qrCode.toDataURL(stringdata, function(err, code) {
-        console.log(code)
-    }) 
-     *
-     */
 })
 
 app.listen(3000)
