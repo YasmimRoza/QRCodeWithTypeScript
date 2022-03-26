@@ -15,7 +15,9 @@ let data = {
     id: "sdf8s7fn32o3483297d"
 }
 
-let stringdata: string = JSON.stringify(data)
+let stringdata = JSON.stringify(data)
+
+let link: string = `https://developer.mozilla.org/en-US/docs/Web/JavaScript`
 
 app.get('/console', (req, res) => {
 
@@ -27,9 +29,20 @@ app.get('/console', (req, res) => {
            console.log(err)
         })
 
-    qrCode.toDataURL(stringdata, {
+    qrCode.toDataURL(stringdata, { // retorna um json
         color: {
             dark: '#ff0000',
+            light: '#0000'
+        },
+        version: 10, scale: 10, margin: 6, width: 400, 
+    },function(err, code){
+        if (err) console.log('error' + err)
+        // return res.send("<!DOCTYPE html/><html><head><title>node-qrcode</title></head><body><img src='" + code + "'/></body></html>")
+    })
+
+    qrCode.toDataURL(link, {
+        color: {
+            dark: '#800000',
             light: '#0000'
         },
         version: 10, scale: 10, margin: 6, width: 400, 
